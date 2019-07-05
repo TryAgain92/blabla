@@ -48,36 +48,35 @@ namespace ConsoleApplication2
             List<Point> rightLine = new List<Point>() { topRight, new Point() { X = bottomRight.X - topRight.X, Y = bottomRight.Y - topRight.Y } };
             List<Point> bottomLine = new List<Point>() { bottomRight, new Point() { X = bottomLeft.X - bottomRight.X, Y = bottomLeft.Y - bottomRight.Y } };
 
-            List<List<Point>> squareLines =  new List<List<Point>>() { leftLine, topLine, rightLine, bottomLine };
 
-            double parameterPointToLeftSide = (double)(P.Y - squareLines[0][0].Y) / squareLines[0][1].Y;
+            double parameterPointToLeftSide = (double)(P.Y - leftLine[0].Y) / leftLine[1].Y;
             Tuple<double, double> shortestPointOnLeftLineToPointAsDouble = new Tuple<double, double>(
-                    squareLines[0][0].X + parameterPointToLeftSide * squareLines[0][1].X,
-                    squareLines[0][0].Y + parameterPointToLeftSide * squareLines[0][1].Y
+                    leftLine[0].X + parameterPointToLeftSide * leftLine[1].X,
+                    leftLine[0].Y + parameterPointToLeftSide * leftLine[1].Y
                 );
             Point shortestPointOnLeftLineToPoint = new Point() { X = (int)shortestPointOnLeftLineToPointAsDouble.Item1, Y = (int)shortestPointOnLeftLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToTopSide = (double)(P.X - squareLines[1][0].X) / squareLines[1][1].X;
+            double parameterPointToTopSide = (double)(P.X - topLine[0].X) / topLine[1].X;
             Tuple<double, double> shortestPointOnTopLineToPointAsDouble = new Tuple<double, double>(
-                    squareLines[1][0].X + parameterPointToTopSide * squareLines[1][1].X,
-                    squareLines[1][0].Y + parameterPointToTopSide * squareLines[1][1].Y
+                    topLine[0].X + parameterPointToTopSide * topLine[1].X,
+                    topLine[0].Y + parameterPointToTopSide * topLine[1].Y
                 );
             Point shortestPointOnTopLineToPoint = new Point() { X = (int)shortestPointOnTopLineToPointAsDouble.Item1, Y = (int)shortestPointOnTopLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToRightSide = (double)(P.Y - squareLines[2][0].Y) / squareLines[2][1].Y;
+            double parameterPointToRightSide = (double)(P.Y - rightLine[0].Y) / rightLine[1].Y;
             Tuple<double, double> shortestPointOnRightLineToPointAsDouble = new Tuple<double, double>(
-                    squareLines[2][0].X + parameterPointToRightSide * squareLines[2][1].X,
-                    squareLines[2][0].Y + parameterPointToRightSide * squareLines[2][1].Y
+                    rightLine[0].X + parameterPointToRightSide * rightLine[1].X,
+                    rightLine[0].Y + parameterPointToRightSide * rightLine[1].Y
                 );
             Point shortestPointOnRightLineToPoint = new Point() { X = (int)shortestPointOnRightLineToPointAsDouble.Item1, Y = (int)shortestPointOnRightLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToBottomSide = (double)(P.X - squareLines[3][0].X) / squareLines[2][1].X;
+            double parameterPointToBottomSide = (double)(P.X - rightLine[0].X) / rightLine[1].X;
             Tuple<double, double> shortestPointOnBottomLineToPointAsDouble = new Tuple<double, double>(
-                    squareLines[3][0].X + parameterPointToBottomSide * squareLines[3][1].X,
-                    squareLines[3][0].Y + parameterPointToBottomSide * squareLines[3][1].Y
+                    rightLine[0].X + parameterPointToBottomSide * rightLine[1].X,
+                    rightLine[0].Y + parameterPointToBottomSide * rightLine[1].Y
                 );
             Point shortestPointOnBottomLineToPoint = new Point() { X = (int)shortestPointOnBottomLineToPointAsDouble.Item1, Y = (int)shortestPointOnBottomLineToPointAsDouble.Item2 };
 
@@ -102,9 +101,9 @@ namespace ConsoleApplication2
             Point bottomRight = upperDownSortedByRightPoints[0];
             Point topRight = upperDownSortedByRightPoints[1];
 
-            Point maxLeftPoint = bottomLeft.X < topLeft.X ? bottomLeft: topLeft;
-            Point maxTopPoint = topLeft.Y > bottomRight.Y ? topLeft: bottomRight;
-            Point maxRightPoint = topRight.X > bottomRight.X ? topRight: bottomRight;
+            Point maxLeftPoint = bottomLeft.X < topLeft.X ? bottomLeft : topLeft;
+            Point maxTopPoint = topLeft.Y > bottomRight.Y ? topLeft : bottomRight;
+            Point maxRightPoint = topRight.X > bottomRight.X ? topRight : bottomRight;
             Point maxBottomPoint = bottomRight.Y < bottomLeft.Y ? bottomRight : bottomLeft;
 
             List<Point> pointsInRect = new List<Point>();
