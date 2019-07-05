@@ -29,7 +29,7 @@ namespace ConsoleApplication2
 
         }
         
-         public static bool pointIsInRect(Point P, List<Point> cornerPoints)
+        public static bool pointIsInRect(Point P, List<Point> cornerPoints)
         {
             List<Point> RightLeftSortedPoints = cornerPoints.OrderBy(point => point.X).ToList();
             List<Point> LeftPoints = RightLeftSortedPoints.GetRange(0, 2);
@@ -43,40 +43,40 @@ namespace ConsoleApplication2
             Point bottomRight = upperDownSortedByRightPoints[0];
             Point topRight = upperDownSortedByRightPoints[1];
 
-            List<Point> leftLine = new List<Point>() { bottomLeft, new Point() { X = topLeft.X - bottomLeft.X, Y = topLeft.Y - bottomLeft.Y } };
-            List<Point> topLine = new List<Point>() { topLeft, new Point() { X = topRight.X - topLeft.X, Y = topRight.Y - topLeft.Y } };
-            List<Point> rightLine = new List<Point>() { topRight, new Point() { X = bottomRight.X - topRight.X, Y = bottomRight.Y - topRight.Y } };
-            List<Point> bottomLine = new List<Point>() { bottomRight, new Point() { X = bottomLeft.X - bottomRight.X, Y = bottomLeft.Y - bottomRight.Y } };
+            Point leftLineDirection = new Point() { X = topLeft.X - bottomLeft.X, Y = topLeft.Y - bottomLeft.Y };
+            Point topLineDirection = new Point() { X = topRight.X - topLeft.X, Y = topRight.Y - topLeft.Y };
+            Point rightLineDirection = new Point() { X = bottomRight.X - topRight.X, Y = bottomRight.Y - topRight.Y };
+            Point bottomLineDirection = new Point() { X = bottomLeft.X - bottomRight.X, Y = bottomLeft.Y - bottomRight.Y };
 
 
-            double parameterPointToLeftSide = (double)(P.Y - leftLine[0].Y) / leftLine[1].Y;
+            double parameterPointToLeftSide = (double)(P.Y - bottomLeft.Y) / leftLineDirection.Y;
             Tuple<double, double> shortestPointOnLeftLineToPointAsDouble = new Tuple<double, double>(
-                    leftLine[0].X + parameterPointToLeftSide * leftLine[1].X,
-                    leftLine[0].Y + parameterPointToLeftSide * leftLine[1].Y
+                    bottomLeft.X + parameterPointToLeftSide * leftLineDirection.X,
+                    bottomLeft.Y + parameterPointToLeftSide * leftLineDirection.Y
                 );
             Point shortestPointOnLeftLineToPoint = new Point() { X = (int)shortestPointOnLeftLineToPointAsDouble.Item1, Y = (int)shortestPointOnLeftLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToTopSide = (double)(P.X - topLine[0].X) / topLine[1].X;
+            double parameterPointToTopSide = (double)(P.X - topLeft.X) / topLineDirection.X;
             Tuple<double, double> shortestPointOnTopLineToPointAsDouble = new Tuple<double, double>(
-                    topLine[0].X + parameterPointToTopSide * topLine[1].X,
-                    topLine[0].Y + parameterPointToTopSide * topLine[1].Y
+                    topLeft.X + parameterPointToTopSide * topLineDirection.X,
+                    topLeft.Y + parameterPointToTopSide * topLineDirection.Y
                 );
             Point shortestPointOnTopLineToPoint = new Point() { X = (int)shortestPointOnTopLineToPointAsDouble.Item1, Y = (int)shortestPointOnTopLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToRightSide = (double)(P.Y - rightLine[0].Y) / rightLine[1].Y;
+            double parameterPointToRightSide = (double)(P.Y - topRight.Y) / rightLineDirection.Y;
             Tuple<double, double> shortestPointOnRightLineToPointAsDouble = new Tuple<double, double>(
-                    rightLine[0].X + parameterPointToRightSide * rightLine[1].X,
-                    rightLine[0].Y + parameterPointToRightSide * rightLine[1].Y
+                    topRight.X + parameterPointToRightSide * rightLineDirection.X,
+                    topRight.Y + parameterPointToRightSide * rightLineDirection.Y
                 );
             Point shortestPointOnRightLineToPoint = new Point() { X = (int)shortestPointOnRightLineToPointAsDouble.Item1, Y = (int)shortestPointOnRightLineToPointAsDouble.Item2 };
 
 
-            double parameterPointToBottomSide = (double)(P.X - rightLine[0].X) / rightLine[1].X;
+            double parameterPointToBottomSide = (double)(P.X - bottomRight.X) / bottomLineDirection.X;
             Tuple<double, double> shortestPointOnBottomLineToPointAsDouble = new Tuple<double, double>(
-                    rightLine[0].X + parameterPointToBottomSide * rightLine[1].X,
-                    rightLine[0].Y + parameterPointToBottomSide * rightLine[1].Y
+                    bottomRight.X + parameterPointToBottomSide * bottomLineDirection.X,
+                    bottomRight.Y + parameterPointToBottomSide * bottomLineDirection.Y
                 );
             Point shortestPointOnBottomLineToPoint = new Point() { X = (int)shortestPointOnBottomLineToPointAsDouble.Item1, Y = (int)shortestPointOnBottomLineToPointAsDouble.Item2 };
 
